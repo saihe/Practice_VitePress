@@ -7,6 +7,7 @@
   },
   "devDependencies": {
     "@azure/static-web-apps-cli": "^1.1.7",
-    "vitepress": "^1.1.0"
+    "vitepress": "^1.1.0",
+    "vitest": "^1.5.0"
   }
 }
