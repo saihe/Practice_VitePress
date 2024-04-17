@@ -1,20 +1,5 @@
-Practice_VitePress
-===
+[![Deploy web app to Azure Static Web Apps](https://github.com/saihe/Practice_VitePress/actions/workflows/azure-staticwebapp.yml/badge.svg?branch=main)](https://github.com/saihe/Practice_VitePress/actions/workflows/azure-staticwebapp.yml)
 
-``` bash
-# dev 
-npm run dev
+# VitePress —ûK
 
-# run in production with minification at localhost:3000
-npm run product
-
-# show logs
-npm run logs
-
-# show process list
-npm run list
-
-# stop
-npm run stop
-
-```
+## ‚Æ‚è‚ ‚¦‚¸‹Î‘ÓŠÇ—ƒVƒXƒeƒ€•—‚Éì‚é
