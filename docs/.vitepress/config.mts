@@ -5,7 +5,11 @@ export default defineConfig({
   lang: 'ja_JP',
   title: 'レーベン勤怠管理システム',
   description: '株式会社レーベン社内システムのうちのひとつ。',
-  // head: [[ 'link', { rel: 'stylesheet', href: 'style.css' }]],
+  vite: {
+    ssr: {
+      noExternal: ["vuetify"]
+    }
+  },
   themeConfig: {
     logo: '/logo.png',
     // https://vitepress.dev/reference/default-theme-config
