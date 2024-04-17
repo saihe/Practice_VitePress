@@ -1,275 +1,290 @@
 <script setup>
+import { timeToDecimal, decimalToTimeString } from '../utilities/dateTime';
+
 const dayOfWeek = ['日', '月', '火', '水', '木', '金', '土']
 
 const workCategories = [
-{code: 0, displayText: ''},
-{code: 1, displayText: '振出'},
-{code: 2, displayText: '法定休出'},
-{code: 3, displayText: '所定休出'},
-{code: 4, displayText: '有休'},
-{code: 5, displayText: '特休'},
-{code: 6, displayText: '振休'},
-{code: 7, displayText: '代休'},
-{code: 8, displayText: '欠勤'},
-{code: 9, displayText: '遅・早'},
-{code: 10, displayText: 'シフト'},
-{code: 11, displayText: '半休'},
+  {code: 0, displayText: ''},
+  {code: 1, displayText: '振出'},
+  {code: 2, displayText: '法定休出'},
+  {code: 3, displayText: '所定休出'},
+  {code: 4, displayText: '有休'},
+  {code: 5, displayText: '特休'},
+  {code: 6, displayText: '振休'},
+  {code: 7, displayText: '代休'},
+  {code: 8, displayText: '欠勤'},
+  {code: 9, displayText: '遅・早'},
+  {code: 10, displayText: 'シフト'},
+  {code: 11, displayText: '半休'},
 ]
 
 const attendances = [
-{
-  attendanceDate: '2024-02-01',
-  workCategory: '',
-  workStartedAt: '',
-  workFinishedAt: '',
-  restStartedAt: '',
-  restFinishedAt: '',
-  workDetail: ''
-},
-{
-  attendanceDate: '2024-02-02',
-  workCategory: '',
-  workStartedAt: '',
-  workFinishedAt: '',
-  restStartedAt: '',
-  restFinishedAt: '',
-  workDetail: ''
-},
-{
-  attendanceDate: '2024-02-03',
-  workCategory: '1',
-  workStartedAt: '08:00',
-  workFinishedAt: '17:00',
-  restStartedAt: '12:00',
-  restFinishedAt: '13:00',
-  workDetail: ''
-},
-{
-  attendanceDate: '2024-02-04',
-  workCategory: '',
-  workStartedAt: '',
-  workFinishedAt: '',
-  restStartedAt: '',
-  restFinishedAt: '',
-  workDetail: ''
-},
-{
-  attendanceDate: '2024-02-05',
-  workCategory: '',
-  workStartedAt: '',
-  workFinishedAt: '',
-  restStartedAt: '',
-  restFinishedAt: '',
-  workDetail: ''
-},
-{
-  attendanceDate: '2024-02-06',
-  workCategory: '',
-  workStartedAt: '08:00',
-  workFinishedAt: '17:00',
-  restStartedAt: '12:00',
-  restFinishedAt: '13:00',
-  workDetail: ''
-},
-{
-  attendanceDate: '2024-02-07',
-  workCategory: '',
-  workStartedAt: '08:00',
-  workFinishedAt: '17:00',
-  restStartedAt: '12:00',
-  restFinishedAt: '13:00',
-  workDetail: ''
-},
-{
-  attendanceDate: '2024-02-08',
-  workCategory: '',
-  workStartedAt: '08:00',
-  workFinishedAt: '17:00',
-  restStartedAt: '12:00',
-  restFinishedAt: '13:00',
-  workDetail: ''
-},
-{
-  attendanceDate: '2024-02-09',
-  workCategory: '',
-  workStartedAt: '08:00',
-  workFinishedAt: '17:00',
-  restStartedAt: '12:00',
-  restFinishedAt: '13:00',
-  workDetail: ''
-},
-{
-  attendanceDate: '2024-02-10',
-  workCategory: '',
-  workStartedAt: '',
-  workFinishedAt: '',
-  restStartedAt: '',
-  restFinishedAt: '',
-  workDetail: ''
-},
-{
-  attendanceDate: '2024-02-11',
-  workCategory: '',
-  workStartedAt: '',
-  workFinishedAt: '',
-  restStartedAt: '',
-  restFinishedAt: '',
-  workDetail: ''
-},
-{
-  attendanceDate: '2024-02-12',
-  workCategory: '',
-  workStartedAt: '08:00',
-  workFinishedAt: '17:00',
-  restStartedAt: '12:00',
-  restFinishedAt: '13:00',
-  workDetail: ''
-},
-{
-  attendanceDate: '2024-02-13',
-  workCategory: '',
-  workStartedAt: '08:00',
-  workFinishedAt: '17:00',
-  restStartedAt: '12:00',
-  restFinishedAt: '13:00',
-  workDetail: ''
-},
-{
-  attendanceDate: '2024-02-14',
-  workCategory: '',
-  workStartedAt: '08:00',
-  workFinishedAt: '17:00',
-  restStartedAt: '12:00',
-  restFinishedAt: '13:00',
-  workDetail: ''
-},
-{
-  attendanceDate: '2024-02-15',
-  workCategory: '',
-  workStartedAt: '08:00',
-  workFinishedAt: '17:00',
-  restStartedAt: '12:00',
-  restFinishedAt: '13:00',
-  workDetail: ''
-},
-{
-  attendanceDate: '2024-02-16',
-  workCategory: '',
-  workStartedAt: '08:00',
-  workFinishedAt: '17:00',
-  restStartedAt: '12:00',
-  restFinishedAt: '13:00',
-  workDetail: ''
-},
-{
-  attendanceDate: '2024-02-17',
-  workCategory: '',
-  workStartedAt: '',
-  workFinishedAt: '',
-  restStartedAt: '',
-  restFinishedAt: '',
-  workDetail: ''
-},
-{
-  attendanceDate: '2024-02-18',
-  workCategory: '',
-  workStartedAt: '',
-  workFinishedAt: '',
-  restStartedAt: '',
-  restFinishedAt: '',
-  workDetail: ''
-},
-{
-  attendanceDate: '2024-02-19',
-  workCategory: '',
-  workStartedAt: '08:00',
-  workFinishedAt: '17:00',
-  restStartedAt: '12:00',
-  restFinishedAt: '13:00',
-  workDetail: ''
-},
-{
-  attendanceDate: '2024-02-20',
-  workCategory: '',
-  workStartedAt: '08:00',
-  workFinishedAt: '17:00',
-  restStartedAt: '12:00',
-  restFinishedAt: '13:00',
-  workDetail: ''
-},
-{
-  attendanceDate: '2024-02-21',
-  workCategory: '',
-  workStartedAt: '08:00',
-  workFinishedAt: '17:00',
-  restStartedAt: '12:00',
-  restFinishedAt: '13:00',
-  workDetail: ''
-},
-{
-  attendanceDate: '2024-02-22',
-  workCategory: '',
-  workStartedAt: '08:00',
-  workFinishedAt: '17:00',
-  restStartedAt: '12:00',
-  restFinishedAt: '13:00',
-  workDetail: ''
-},
-{
-  attendanceDate: '2024-02-23',
-  workCategory: '',
-  workStartedAt: '08:00',
-  workFinishedAt: '17:00',
-  restStartedAt: '12:00',
-  restFinishedAt: '13:00',
-  workDetail: ''
-},
-{
-  attendanceDate: '2024-02-24',
-  workCategory: '',
-  workStartedAt: '',
-  workFinishedAt: '',
-  restStartedAt: '',
-  restFinishedAt: '',
-  workDetail: ''
-},
-{
-  attendanceDate: '2024-02-25',
-  workCategory: '',
-  workStartedAt: '',
-  workFinishedAt: '',
-  restStartedAt: '',
-  restFinishedAt: '',
-  workDetail: ''
-},
-{
-  attendanceDate: '2024-02-26',
-  workCategory: '',
-  workStartedAt: '08:00',
-  workFinishedAt: '17:00',
-  restStartedAt: '12:00',
-  restFinishedAt: '13:00',
-  workDetail: ''
-},
-{
-  attendanceDate: '2024-02-27',
-  workCategory: '',
-  workStartedAt: '08:00',
-  workFinishedAt: '17:00',
-  restStartedAt: '12:00',
-  restFinishedAt: '13:00',
-  workDetail: ''
-},
-{
-  attendanceDate: '2024-02-28',
-  workCategory: '',
-  workStartedAt: '08:00',
-  workFinishedAt: '17:00',
-  restStartedAt: '12:00',
-  restFinishedAt: '13:00',
-  workDetail: ''
-},
+  {
+    attendanceDate: '2024-02-01',
+    workCategory: '',
+    workStartedAt: '',
+    workFinishedAt: '',
+    restStartedAt: '',
+    restFinishedAt: '',
+    workDetail: '何かしら作業'
+  },
+  {
+    attendanceDate: '2024-02-02',
+    workCategory: '',
+    workStartedAt: '',
+    workFinishedAt: '',
+    restStartedAt: '',
+    restFinishedAt: '',
+    workDetail: '何かしら作業'
+  },
+  {
+    attendanceDate: '2024-02-03',
+    workCategory: '1',
+    workStartedAt: '08:00:00',
+    workFinishedAt: '17:00:00',
+    restStartedAt: '12:00:00:00',
+    restFinishedAt: '13:00:00',
+    workDetail: '何かしら作業'
+  },
+  {
+    attendanceDate: '2024-02-04',
+    workCategory: '',
+    workStartedAt: '',
+    workFinishedAt: '',
+    restStartedAt: '',
+    restFinishedAt: '',
+    workDetail: '何かしら作業'
+  },
+  {
+    attendanceDate: '2024-02-05',
+    workCategory: '',
+    workStartedAt: '',
+    workFinishedAt: '',
+    restStartedAt: '',
+    restFinishedAt: '',
+    workDetail: '何かしら作業'
+  },
+  {
+    attendanceDate: '2024-02-06',
+    workCategory: '',
+    workStartedAt: '08:00:00',
+    workFinishedAt: '17:00:00',
+    restStartedAt: '12:00:00',
+    restFinishedAt: '13:00:00',
+    workDetail: '何かしら作業'
+  },
+  {
+    attendanceDate: '2024-02-07',
+    workCategory: '',
+    workStartedAt: '08:00:00',
+    workFinishedAt: '17:00:00',
+    restStartedAt: '12:00:00',
+    restFinishedAt: '13:00:00',
+    workDetail: '何かしら作業'
+  },
+  {
+    attendanceDate: '2024-02-08',
+    workCategory: '',
+    workStartedAt: '08:00:00',
+    workFinishedAt: '17:00:00',
+    restStartedAt: '12:00:00',
+    restFinishedAt: '13:00:00',
+    workDetail: '何かしら作業'
+  },
+  {
+    attendanceDate: '2024-02-09',
+    workCategory: '',
+    workStartedAt: '08:00:00',
+    workFinishedAt: '17:00:00',
+    restStartedAt: '12:00:00',
+    restFinishedAt: '13:00:00',
+    workDetail: '何かしら作業'
+  },
+  {
+    attendanceDate: '2024-02-10',
+    workCategory: '',
+    workStartedAt: '',
+    workFinishedAt: '',
+    restStartedAt: '',
+    restFinishedAt: '',
+    workDetail: '何かしら作業'
+  },
+  {
+    attendanceDate: '2024-02-11',
+    workCategory: '',
+    workStartedAt: '',
+    workFinishedAt: '',
+    restStartedAt: '',
+    restFinishedAt: '',
+    workDetail: '何かしら作業'
+  },
+  {
+    attendanceDate: '2024-02-12',
+    workCategory: '',
+    workStartedAt: '08:00:00',
+    workFinishedAt: '17:00:00',
+    restStartedAt: '12:00:00',
+    restFinishedAt: '13:00:00',
+    workDetail: '何かしら作業'
+  },
+  {
+    attendanceDate: '2024-02-13',
+    workCategory: '',
+    workStartedAt: '08:00:00',
+    workFinishedAt: '17:00:00',
+    restStartedAt: '12:00:00',
+    restFinishedAt: '13:00:00',
+    workDetail: '何かしら作業'
+  },
+  {
+    attendanceDate: '2024-02-14',
+    workCategory: '',
+    workStartedAt: '08:00:00',
+    workFinishedAt: '17:00:00',
+    restStartedAt: '12:00:00',
+    restFinishedAt: '13:00:00',
+    workDetail: '何かしら作業'
+  },
+  {
+    attendanceDate: '2024-02-15',
+    workCategory: '',
+    workStartedAt: '08:00:00',
+    workFinishedAt: '17:00:00',
+    restStartedAt: '12:00:00',
+    restFinishedAt: '13:00:00',
+    workDetail: '何かしら作業'
+  },
+  {
+    attendanceDate: '2024-02-16',
+    workCategory: '',
+    workStartedAt: '08:00:00',
+    workFinishedAt: '17:00:00',
+    restStartedAt: '12:00:00',
+    restFinishedAt: '13:00:00',
+    workDetail: '何かしら作業'
+  },
+  {
+    attendanceDate: '2024-02-17',
+    workCategory: '',
+    workStartedAt: '',
+    workFinishedAt: '',
+    restStartedAt: '',
+    restFinishedAt: '',
+    workDetail: '何かしら作業'
+  },
+  {
+    attendanceDate: '2024-02-18',
+    workCategory: '',
+    workStartedAt: '',
+    workFinishedAt: '',
+    restStartedAt: '',
+    restFinishedAt: '',
+    workDetail: '何かしら作業'
+  },
+  {
+    attendanceDate: '2024-02-19',
+    workCategory: '',
+    workStartedAt: '08:00:00',
+    workFinishedAt: '17:00:00',
+    restStartedAt: '12:00:00',
+    restFinishedAt: '13:00:00',
+    workDetail: '何かしら作業'
+  },
+  {
+    attendanceDate: '2024-02-20',
+    workCategory: '',
+    workStartedAt: '08:00:00',
+    workFinishedAt: '17:00:00',
+    restStartedAt: '12:00:00',
+    restFinishedAt: '13:00:00',
+    workDetail: '何かしら作業'
+  },
+  {
+    attendanceDate: '2024-02-21',
+    workCategory: '',
+    workStartedAt: '08:00:00',
+    workFinishedAt: '17:00:00',
+    restStartedAt: '12:00:00',
+    restFinishedAt: '13:00:00',
+    workDetail: '何かしら作業'
+  },
+  {
+    attendanceDate: '2024-02-22',
+    workCategory: '',
+    workStartedAt: '08:00:00',
+    workFinishedAt: '17:00:00',
+    restStartedAt: '12:00:00',
+    restFinishedAt: '13:00:00',
+    workDetail: '何かしら作業'
+  },
+  {
+    attendanceDate: '2024-02-23',
+    workCategory: '',
+    workStartedAt: '08:00:00',
+    workFinishedAt: '17:00:00',
+    restStartedAt: '12:00:00',
+    restFinishedAt: '13:00:00',
+    workDetail: '何かしら作業'
+  },
+  {
+    attendanceDate: '2024-02-24',
+    workCategory: '',
+    workStartedAt: '',
+    workFinishedAt: '',
+    restStartedAt: '',
+    restFinishedAt: '',
+    workDetail: '何かしら作業'
+  },
+  {
+    attendanceDate: '2024-02-25',
+    workCategory: '',
+    workStartedAt: '',
+    workFinishedAt: '',
+    restStartedAt: '',
+    restFinishedAt: '',
+    workDetail: '何かしら作業'
+  },
+  {
+    attendanceDate: '2024-02-26',
+    workCategory: '',
+    workStartedAt: '08:00:00',
+    workFinishedAt: '17:00:00',
+    restStartedAt: '12:00:00',
+    restFinishedAt: '13:00:00',
+    workDetail: '何かしら作業'
+  },
+  {
+    attendanceDate: '2024-02-27',
+    workCategory: '',
+    workStartedAt: '08:00:00',
+    workFinishedAt: '17:00:00',
+    restStartedAt: '12:00:00',
+    restFinishedAt: '13:00:00',
+    workDetail: '何かしら作業'
+  },
+  {
+    attendanceDate: '2024-02-28',
+    workCategory: '',
+    workStartedAt: '08:00:00',
+    workFinishedAt: '17:00:00',
+    restStartedAt: '12:00:00',
+    restFinishedAt: '13:00:00',
+    workDetail: '何かしら作業'
+  },
 ]
+
+const calcRestTime = (finishedAt, startedAt) => {
+  if (!finishedAt || !startedAt) {
+    return ""
+  }
+  return decimalToTimeString(timeToDecimal(finishedAt) - timeToDecimal(startedAt))
+}
+const calcWorkTime = (workFinishedAt, workStartedAt, restFinishedAt, restStartedAt) => {
+  if (!workFinishedAt) {
+    return ""
+  }
+  return decimalToTimeString(timeToDecimal(workFinishedAt) - timeToDecimal(workStartedAt) - (timeToDecimal(restFinishedAt) - timeToDecimal(restStartedAt)))
+}
 
 </script>
 

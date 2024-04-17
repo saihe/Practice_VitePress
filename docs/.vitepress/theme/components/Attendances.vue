@@ -1,7 +1,5 @@
 <script setup>
-import { timeToDecimal, decimalToTimeString } from '../utilities/dateTime';
-
-const dayOfWeek = ['日', '月', '火', '水', '木', '金', '土']
+import { timeToDecimal, decimalToTimeString, getDayOfWeek } from '../utilities/dateTime';
 
 const workCategories = [
   {code: 0, displayText: ''},
@@ -285,6 +283,7 @@ const calcWorkTime = (workFinishedAt, workStartedAt, restFinishedAt, restStarted
   }
   return decimalToTimeString(timeToDecimal(workFinishedAt) - timeToDecimal(workStartedAt) - (timeToDecimal(restFinishedAt) - timeToDecimal(restStartedAt)))
 }
+const dayOfWeek = (dateString) => getDayOfWeek(dateString)
 
 </script>
 
@@ -322,7 +321,7 @@ const calcWorkTime = (workFinishedAt, workStartedAt, restFinishedAt, restStarted
       <tbody>
         <tr v-for="attendance in attendances" :key="attendance.attendanceDate">
           <td><input type="date" name="attendanceDate" :value="attendance.attendanceDate" /></td>
-          <td>{{ dayOfWeek[new Date(attendance.attendanceDate).getDay()] }}</td>
+          <td>{{ dayOfWeek(attendance.attendanceDate) }}</td>
           <td>
             <select name="workCategory" v-model="attendance.workCategory">
               <option v-for="c in workCategories" :value="c.code">{{ c.displayText }}</option>
