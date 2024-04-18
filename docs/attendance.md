@@ -5,7 +5,7 @@ next: false
 ---
 
 <script setup>
-  import Attendances from '.vitepress/theme/components/Attendances.vue'
+  import Attendances from '.vitepress/theme/contents/Attendances.vue'
 </script>
 
 <style>
