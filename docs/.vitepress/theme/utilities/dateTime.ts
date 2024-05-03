@@ -34,6 +34,52 @@ export const decimalToTimeString = (decimal: number): string => {
 }
 
 const dayOfWeek = ['月', '火', '水', '木', '金', '土', '日']
+/**
+ * 年月日から曜日を取得する
+ * @param dateString 年月日
+ * @returns 曜日
+ */
 export const getDayOfWeek = (dateString: string): string => {
   return dayOfWeek[new Date(dateString).getDay()]
+}
+
+/**
+ * 日付をyyyy/MM/dd形式の文字列にする
+ * @param value 日付
+ * @returns 
+ */
+export const dateFormatToDispay = (value: Date): string => value.toLocaleDateString('japanese', {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+})
+
+/**
+ * 日付をyyyy/MM形式の文字列にする
+ * @param value 日付
+ * @returns 
+ */
+export const yearMonthFormatToDisplay = (value: Date): string => dateFormatToDispay(value).substring(0, 7)
+
+/**
+ * 日付をHH24:mm:ss形式の文字列にする
+ * @param value 日付
+ * @returns 
+ */
+export const timeFormatToDispay = (value: Date): string => value.toLocaleTimeString('japanese', {
+  hourCycle: 'h23',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
+})
+
+/**
+ * 日付オブジェクトに指定された時刻を設定する
+ * @param date 時刻をセットする対象の日付
+ * @param timeString 変更予定の時刻
+ * @returns 
+ */
+export const setTime = (date: Date, timeString: string): Date => {
+  const splitted = timeString.split(":")
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate(), Number(splitted[0]), Number(splitted[1]), Number(splitted[2]))
 }
